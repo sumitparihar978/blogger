@@ -35,6 +35,11 @@ gem 'paperclip'
 gem 'jquery-rails'
 gem 'bootstrap', '~> 4.3.1'
 gem 'momentjs-rails'
+gem 'devise-bootstrapped'
+gem 'popper_js', '~> 1.14.5'
+gem 'jquery-ui-rails'
+gem 'font-awesome-sass'
+gem "rails_autolink"
 
 # paginate
 gem 'will_paginate', '>= 3.1'

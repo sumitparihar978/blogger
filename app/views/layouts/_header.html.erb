@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <a href="/">
+    Blogger
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <div id="collapsibleNavbar" class="collapse navbar-collapse justify-content-end">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active nav-item"><a class="nav-link" href="/">Home</a></li>
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link" %>
+          </li>
+        <% else %>
+         <li class="nav-item">
+           <%= link_to "Login", new_user_session_path , class: "nav-link" %>
+         </li>
+        <% end %>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>

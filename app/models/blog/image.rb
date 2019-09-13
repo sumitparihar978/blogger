@@ -7,10 +7,4 @@ class Blog::Image < Asset
         },:default_url => "img_not_available.png",
         :convert_options => {:all => "-quality 100"}
     validates_attachment :attachment, content_type: { content_type: ["image/jpg", "image/jpeg", "image/gif", "image/png"] }
-
-
-    def image_url
-        build_image unless image
-        image.url(:thumb)
-    end
 end

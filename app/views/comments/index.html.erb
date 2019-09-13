@@ -1,0 +1,38 @@
+<%= render "blogs/index", blog: @blog %>
+
+<div id="new-post-comment" class="ShareYourComments ShareWithMyFans hide_content">
+    <%= form_for :comment, url: comments_path(@blog), method: :post do |f| %>
+      <%= f.hidden_field :commentor_id , val: current_user.id %>
+      <%= f.hidden_field :body %>
+      <div id="editable" class="comment-post-corner" contentEditable="true" placeholder="Share Your Comment...">
+      </div>
+      <span class="bodyError"> Comment can't be empty</span>
+      <button class="ShareC" type="submit">Share</button>
+    <% end %>
+</div>
+
+<div class="commentData">
+  <%= render "comments/comments", blog: @blog %>
+</div>
+
+
+
+<% content_for :page_scripts do %>
+  <script type="text/javascript">
+    $(document).on('ready turbolinks:load', function() {
+      $(document).on("submit", "#new-post-comment form", function(e) {
+        e.preventDefault();
+        if(!($("#editable").text().trim().length == 0)){
+          var contents = $("#editable").html();
+          $('#new-post-comment #comment_body').val(contents);
+          this.submit();
+        }
+        else{
+          $('.bodyError').show().delay(5000).fadeOut();
+          return false;
+        }
+      });
+    });
+  </script>
+<% end %>
+<!-- End middle Section -->

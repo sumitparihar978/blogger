@@ -1,0 +1,36 @@
+<div class="blog" id="blog-np-<%= blog.id %>">
+  <div class="userPic">
+    <%= image_tag blog.user.image_url %>
+  </div>
+  <div class="userInfo">
+    <span class="post-user-first_name">
+      <%= link_to "javascript:void(0);" do %>
+        <%= blog.user.first_name %>
+      <% end %>
+    </span>
+    <span class="post-user-last_name">
+      <%= "@#{blog.user.last_name}" %>
+    </span>
+    <div class="time-stamp-data">
+      <%= content_tag :span, class: "blog-timestamp", data: {momentize: blog.momentize, image: image_url("dot-pic.png")}  do %>
+      <% end %>
+    </div>
+  </div>
+  <div class="blogData">
+    <div class="content-blog-text">
+      <span class="title">
+        <%= blog.name %>
+      </span>
+      <span class="description">
+        <%= blog.description %>
+      </span>
+    </div>
+    <div class="imageData">
+      <%= image_tag blog.image_url %>
+    </div>
+    
+  </div>
+  <div class="likeAndCommentArea_<%= blog.id %> likeAndCommentArea">
+    <%= render "blogs/like_comment", blog: blog %>
+  </div>
+</div>

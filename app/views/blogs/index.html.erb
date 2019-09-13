@@ -1,0 +1,10 @@
+<div class="headerData">
+  <h4> Blogs </h4>
+  <%= link_to 'New Blog', new_blog_path, class: "btn btn-primary" %>
+</div>
+<div class="blog_listing">
+  <% @blogs.each do |blog| %>
+    <%= render "blogs/index", blog: blog %>
+  <% end %>
+</div>
+

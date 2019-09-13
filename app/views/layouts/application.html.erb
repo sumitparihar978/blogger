@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>BloggerApp</title>
+    <title><%= content_for?(:title) ? content_for(:title) : "BloggerApp | Home" %></title>
+    <%= render "layouts/meta" %>
+    <%= action_cable_meta_tag %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+      
+    <%= yield :page_styles %>
+    <%= javascript_include_tag 'turbolinks', 'data-turbolinks-eval': 'false' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <%= yield :page_scripts %>
   </head>
 
   <body>
-    <%= yield %>
+    <%= render "layouts/header" %>
+    <div class="container mobileOnly">
+      <%= yield %>
+    </div>
   </body>
 </html>

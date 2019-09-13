@@ -1,0 +1,21 @@
+<ul>
+  <li>
+    <% if current_user && blog.upvoted?(current_user) %>
+      <%= link_to upvote_blog_path(blog, type: :down) , method: :post, remote: :true do %>
+        <%= image_tag 'upvoted.svg',class: "upvoted" %>
+      <% end %>
+    <% else %>
+      <%= link_to upvote_blog_path(blog, type: :up), method: :post, remote: :true do %>
+        <%= image_tag 'upvote.svg',class: "upvote" %>
+      <% end %>
+    <% end %>
+    <span class="count">
+      <%= blog.votes.count %>
+    </span>
+  </li>
+  <li>
+    <%= link_to comments_path(blog) do %>
+      <%= image_tag 'message.svg',class: "comment" %>
+    <% end %>
+  </li>
+</ul>

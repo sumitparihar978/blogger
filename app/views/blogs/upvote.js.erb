@@ -1,0 +1,1 @@
+$('.likeAndCommentArea_<%= @blog.id %>').html("<%= escape_javascript(render 'blogs/like_comment', blog: @blog ) %>");

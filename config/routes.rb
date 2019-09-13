@@ -1,3 +1,20 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+	root 'blogs#index'
+
+	devise_for :users, controllers: {registrations: "users/registrations"}
+	
+	resources :blogs do
+		member do
+			resources :comments do
+				post :add_reply
+				get :view_replies
+			end
+			post :upvote
+		end
+
+		collection do
+			get :my_blogs
+		end
+	end
 end

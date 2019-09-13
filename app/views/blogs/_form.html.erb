@@ -1,0 +1,31 @@
+<%= form_for(blog) do |f| %>
+  <% if blog.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(blog.errors.count, "error") %> prohibited this blog from being saved:</h2>
+
+      <ul>
+      <% blog.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.text_field :name, autofocus: true, placeholder: 'Name', class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.text_area :description, autocomplete: "off", placeholder: 'Description', class: 'form-control' %>
+  </div>
+
+  <%= f.fields_for :image , f.object.image_url do |image_form| %>
+      <%= image_form.hidden_field :id %>
+      <div class="form-group">
+        <%= image_form.file_field :attachment, class: "user-interest-image-file form-control" %>
+      </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

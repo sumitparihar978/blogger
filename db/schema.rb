@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2019_09_10_180205) do
 
   create_table "comments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "body"
+    t.uuid "source_id"
     t.uuid "commentor_id"
     t.uuid "master_comment_id"
     t.string "commentable_type"
@@ -49,6 +50,7 @@ ActiveRecord::Schema.define(version: 2019_09_10_180205) do
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
     t.index ["commentor_id"], name: "index_comments_on_commentor_id"
     t.index ["master_comment_id"], name: "index_comments_on_master_comment_id"
+    t.index ["source_id"], name: "index_comments_on_source_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -76,6 +78,7 @@ ActiveRecord::Schema.define(version: 2019_09_10_180205) do
   end
 
   add_foreign_key "blogs", "users"
+  add_foreign_key "comments", "blogs", column: "source_id"
   add_foreign_key "comments", "comments", column: "master_comment_id"
   add_foreign_key "comments", "users", column: "commentor_id"
   add_foreign_key "votes", "users", column: "voter_id"

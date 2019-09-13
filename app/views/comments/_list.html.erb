@@ -1,0 +1,40 @@
+<div class="userPic">
+	<%= image_tag comment.user.image_url %>
+</div>
+<div class="userInfo">
+	<span class="post-user-first_name">
+		<%= link_to "javascript:void(0);" do %>
+			<%= comment.user.first_name %>
+		<% end %>
+	</span>
+	<span class="post-user-last_name">
+		<%= "@#{comment.user.last_name}" %>
+	</span>
+	<div class="comment-stamp-data">
+		<%= content_tag :span, class: "comment-timestamp", data: {momentize: comment.momentize, image: image_url("dot-pic.png")}  do %>
+		<% end %>
+	</div>
+</div>
+
+<div class="commentsBody">
+	<%= content_tag :p, class: "content-post-text" do %>
+		<%= shorten_link_new(comment.body.to_s.html_safe) %>
+	<% end %>
+
+	<li class="comment">
+		<% if comment.replies.any? %>
+			<%= link_to view_replies_mobile_post_path(blog, comment_id: comment.id) do%>
+				<span class="rplySpan">
+					<%= pluralize(comment.replies.count, "Buzzing") %>
+				</span>
+			<% end %>
+		<% else %>
+			<% if current_user && comment.user != current_user %>
+				<%= link_to comment_replies_mobile_post_path(blog, comment_id: comment.id) do%>
+					<span class="rplySpan">Reply</span>
+				<% end %>
+			<% end %>
+        <% end %>
+        <%#= content_tag :span,  comment.replies_count %>
+    </li>
+</div>

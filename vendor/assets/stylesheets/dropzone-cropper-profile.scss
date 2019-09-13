@@ -1,0 +1,36 @@
+	
+@import "dropzone/basic";
+@import "dropzone/dropzone";
+@import "cropper/cropper";
+
+
+dropzonemain{
+	main {
+	    padding-top: 200px;
+	}
+
+	.dropzone {
+	    margin: 0 auto;
+	    border: 3px dashed #247bbb;
+	}
+
+	img {
+	    max-width: 100%;
+	}
+}
+.cropper-modal-image{
+	width: 10%;
+	height: 10%;
+}
+.cropper-modal {
+    opacity: 1;
+    background: #fff;
+}
+.image-container-footer {
+    background: #fff;
+    padding: 10px;
+    border-radius: 0px 0px 5px 5px;
+}
+.image-container-footer button.btn {
+    margin-right: 5px;
+}
