@@ -25,16 +25,28 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @comment = @blog.comments.new(comment_params)
-    @comment.commentor_id = current_user.id
+    @comment = Comment.new(comment_params)
     @comment.source_id = @blog.id
+    @comment.user = current_user
+    if @comment.commentable.is_a?(Comment)
+      @comments = @comment.commentable.replies.as_created
+    else
+      @comment.commentable = @blog 
+      @comments = @blog.comments.as_created 
+    end
 
     respond_to do |format|
       if @comment.save
+        @comment = Comment.new(
+            commentable_id: @comment.commentable_id , 
+            commentable_type: 'Comment'
+        )
         format.html { redirect_to comments_path, notice: 'Comment was successfully created.' }
+        format.js { render :create }
         format.json { render :show, status: :created, location: @comment }
       else
         format.html { render :new }
+        format.js { render :create }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
@@ -64,24 +76,13 @@ class CommentsController < ApplicationController
     end
   end
 
-  def add_reply
-    @comment = @blog.comments.find(params[:comment_id])
-    @reply = @comment.replies.new(commentor_id: current_user.id, source_id = @blog.id)
-    @reply.body = params[:body]
-    respond_to do |format|
-      if @reply.save
-        format.html { redirect_to comments_path, notice: 'Comment was successfully created.' }
-        format.json { render :show, status: :created, location: @comment }
-      else
-        format.html { render :new }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
   def view_replies
-    @comment = @blog.comments.find(params[:comment_id])
-    @replies = @comment.replies
+    @comment = Comment.where(id: params[:comment_id] ,source_id: @blog.id ).first
+    @target = Comment.new(
+        commentable_id: @comment.id , 
+        commentable_type: 'Comment'
+    )
   end
 
   private
@@ -96,6 +97,6 @@ class CommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:commentor_id, :body)
+      params.require(:comment).permit(:body, :commentable_id, :commentable_type)
     end
 end

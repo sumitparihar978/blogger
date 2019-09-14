@@ -16,6 +16,9 @@
       <% end %>
     </div>
   </div>
+  <div class="blog-actions" >
+      <%= link_to 'Edit', edit_blog_path(blog) %> 
+  </div>
   <div class="blogData">
     <div class="content-blog-text">
       <span class="title">
@@ -31,6 +34,6 @@
     
   </div>
   <div class="likeAndCommentArea_<%= blog.id %> likeAndCommentArea">
-    <%= render "blogs/like_comment", blog: blog %>
+    <%= render "blogs/partials/blog_actions", blog: blog %>
   </div>
 </div>

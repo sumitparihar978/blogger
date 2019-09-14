@@ -1,0 +1,15 @@
+<div id="new-post-comment" class="ShareYourComments ShareWithMyFans hide_content">
+    <%= form_for comment, url: comments_path(@blog), method: :post, remote: true do |f| %>
+      <%= f.hidden_field :commentable_id %>
+      <%= f.hidden_field :commentable_type %>
+      <%= f.text_field :body,placeholder: "Share Your Comment...", id: "editable", class: "comment-post-corner"  %>
+      <% if comment.errors.any? %>
+	    <div class="error_explanation">
+	      <% comment.errors.messages.each do |key, message| %>
+	        <%= message.join(", ") %>
+	      <% end %>
+	    </div>
+	   <% end%>
+      <button class="ShareC" type="submit">Share</button>
+    <% end %>
+</div>

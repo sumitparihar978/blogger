@@ -1,0 +1,8 @@
+<%= render 'comments/partials/form', comment: comment , blog: blog %>
+<% replies.each do |reply| %>
+	<div class="commentData" id='<%= "comment-replies-#{reply.id}" %>'>
+		<%= render 'comments/partials/nested_reply', reply: reply, comment: comment, blog: blog %>
+	</div>
+<% end %>
+
+

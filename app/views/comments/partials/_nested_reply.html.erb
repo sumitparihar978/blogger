@@ -1,0 +1,35 @@
+<div class="userPic">
+	<%= image_tag reply.user.image_url %>
+</div>
+<div class="userInfo">
+	<span class="post-user-first_name">
+		<%= link_to "javascript:void(0);" do %>
+			<%= reply.user.first_name %>
+		<% end %>
+	</span>
+	<span class="post-user-last_name">
+		<%= "@#{reply.user.last_name}" %>
+	</span>
+	<div class="comment-stamp-data">
+		<%= content_tag :span, class: "comment-timestamp", data: {momentize: reply.momentize, image: image_url("dot-pic.png")}  do %>
+		<% end %>
+	</div>
+</div>
+
+<div class="commentsBody" >
+	<%= content_tag :p, class: "content-post-text" do %>
+		<%= shorten_link_new(reply.body.to_s.html_safe) %>
+	<% end %>
+	<% replies_count = reply.replies.count %>
+	<li class="comment" id="c-reply-<%= reply.id %>" >
+		<% if reply.id && reply.level < Comment::MAX_LEVEL %>
+			<%= link_to comment_view_replies_path(blog, comment_id: reply.id), method: :get, remote: true do%>
+					<span class="rplySpan">
+						<%= replies_count > 0 ? pluralize(reply.replies.count, "Reply") : "Reply"  %>
+					</span>
+			<% end %>
+		<% end%>
+    </li>
+</div>
+
+

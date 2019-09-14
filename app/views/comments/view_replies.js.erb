@@ -1,0 +1,11 @@
+<%
+	html  = escape_javascript(
+		render 'comments/partials/nested_replies', 
+		comment: @target,
+		replies: @comment.replies , 
+		blog: @blog 
+	)
+%>
+
+$('#c-reply-<%= @comment.id %>').html("<%= html %>");
+$(document).trigger('init-momentize');  

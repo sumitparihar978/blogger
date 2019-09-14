@@ -77,3 +77,8 @@ $(document).off('init-momentize').on('init-momentize', function(e) {
         }
     });
 });
+
+
+setInterval(()=>{
+    $(document).trigger('init-momentize');
+}, 25*1000)

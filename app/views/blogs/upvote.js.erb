@@ -1,1 +1,6 @@
-$('.likeAndCommentArea_<%= @blog.id %>').html("<%= escape_javascript(render 'blogs/like_comment', blog: @blog ) %>");
+<% html = escape_javascript(
+		render( 'blogs/partials/blog_actions', blog: @blog) 
+
+)%>
+
+$('.likeAndCommentArea_<%= @blog.id %>').html("<%= html %>");

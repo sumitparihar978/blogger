@@ -9,7 +9,12 @@ class Blog < ApplicationRecord
 	has_many :votes, :as => :votable, :class_name => "Blog::Vote", :dependent => :destroy
 
 	accepts_nested_attributes_for :image
-
+	
+	#
+	# Scopes
+	#
+    scope :as_created, -> { order(created_at: :desc)}
+    
 	#
 	# validations
 	#

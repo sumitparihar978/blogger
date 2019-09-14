@@ -1,4 +1,11 @@
 <p id="notice"><%= notice %></p>
-
-<%= link_to 'Edit', edit_blog_path(@blog) %> |
-<%= link_to 'Back', blogs_path %>
+<%= render "blogs/partials/blog", blog: @blog %>
+<div class="commentWrap" >
+	<div class="commentData" id=comments-<%=@blog.id%>>
+	    <%= render("comments/partials/nested_replies", 
+	  		comment: Comment.new , 
+	  		replies: @blog.comments.as_created, 
+	  		blog: @blog) 
+	  	%>
+	</div>
+</div>

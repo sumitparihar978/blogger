@@ -4,7 +4,7 @@ class BlogsController < ApplicationController
 	# GET /blogs
 	# GET /blogs.json
 	def index
-		@blogs = current_user.blogs.all.paginate(page: (params[:page] || 1), per_page: 20)
+		@blogs = Blog.as_created.paginate(page: (params[:page] || 1), per_page: 20)
 	end
 
 	# GET /blogs/1
@@ -62,7 +62,7 @@ class BlogsController < ApplicationController
 	end
 
 	def my_blogs
-		@blogs = current_user.blogs.all.paginate(page: (params[:page] || 1), per_page: 20)
+		@blogs = current_user.blogs.all.as_created.paginate(page: (params[:page] || 1), per_page: 20)
 	end
 
 	def upvote

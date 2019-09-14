@@ -2,7 +2,7 @@
 <html>
   <head>
     <title><%= content_for?(:title) ? content_for(:title) : "BloggerApp | Home" %></title>
-    <%= render "layouts/meta" %>
+    <%= render "shared/meta" %>
     <%= action_cable_meta_tag %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -17,7 +17,7 @@
   </head>
 
   <body>
-    <%= render "layouts/header" %>
+    <%= render "shared/header" %>
     <div class="container mobileOnly">
       <%= yield %>
     </div>
