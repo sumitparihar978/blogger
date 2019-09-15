@@ -30,10 +30,11 @@
         <%= simple_format(blog.description.to_s) %>
       </span>
     </div>
-    <div class="imageData">
-      <%= image_tag blog.image_url %>
-    </div>
-    
+    <%if blog.image.present? %>
+      <div class="imageData">
+        <%= image_tag blog.image_url %>
+      </div>
+    <% end %>
   </div>
   <div class="likeAndCommentArea_<%= blog.id %> likeAndCommentArea">
     <%= render "blogs/partials/blog_actions", blog: blog %>

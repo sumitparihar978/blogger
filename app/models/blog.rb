@@ -8,7 +8,7 @@ class Blog < ApplicationRecord
 	has_many :comments,:as => :commentable,:class_name => "Blog::Comment",:dependent => :destroy
 	has_many :votes, :as => :votable, :class_name => "Blog::Vote", :dependent => :destroy
 
-	accepts_nested_attributes_for :image
+	accepts_nested_attributes_for :image, :reject_if => proc { |attributes| attributes[:attachment].blank? } 
 	
 	#
 	# Scopes
