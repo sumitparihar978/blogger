@@ -27,7 +27,7 @@
         <%= blog.name %>
       </span>
       <span class="description">
-        <%= blog.description %>
+        <%= simple_format(blog.description.to_s) %>
       </span>
     </div>
     <div class="imageData">

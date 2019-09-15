@@ -5,6 +5,7 @@ class Comment < ApplicationRecord
 	#
 	# associations
 	#
+	has_many :comments,:as => :commentable,:class_name => "Comment",:dependent => :destroy
 	belongs_to :user, foreign_key: :commentor_id, class_name: "User"
 	belongs_to :commentable, polymorphic: true
     belongs_to :source, :class_name => "Blog", :foreign_key => 'source_id'
