@@ -6,4 +6,10 @@
     <%= render "blogs/partials/blog", blog: blog %>
   <% end %>
 </div>
-
+<% if @blogs.count.zero? %>
+	<div class="new-blog-greeting">
+	  <h3> Your created blog will appear hear </h3>
+	 <h3> Create your first blog </h3>
+	 <%= link_to 'New Blog', new_blog_path, class: "btn btn-primary" %>
+	</div>
+<%end%>

@@ -16,9 +16,11 @@
       <% end %>
     </div>
   </div>
-  <div class="blog-actions" >
-      <%= link_to 'Edit', edit_blog_path(blog) %> 
-  </div>
+  <% if blog.user == current_user %>
+    <div class="blog-actions" >
+        <%= link_to 'Edit', edit_blog_path(blog) %> 
+    </div>
+  <% end %>
   <div class="blogData">
     <div class="content-blog-text">
       <span class="title">
