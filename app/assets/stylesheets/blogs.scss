@@ -2,13 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.mobileOnly{
-	width: 100%;
-	max-width: 767px;
-	margin: 0 auto;
-	position: relative;
-	padding-bottom: 50px;
-}
+
 .headerData{
 	display: flex;
 	flex-wrap: wrap;
@@ -21,13 +15,17 @@
 		flex: 0.30;
 	}
 }
+
+.blog + .blog{
+	margin-top: 15px;
+}
 .blog, .commentData{
 	padding: 10px 0px 0;
 	float: left;
 	width: 100%;
 	box-shadow: 0 2px 2px rgba(0,0,0,0.19);
-	margin-bottom: 15px;
-	background: #fff;
+	
+	background: transparent;
 	position: relative;
 	list-style: none;
 	.userPic{
@@ -264,4 +262,8 @@
     justify-content: center;
     min-height: 300px;
     flex-direction: column;
+}
+
+.blog{
+	background: #fff;
 }
